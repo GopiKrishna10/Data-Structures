@@ -1,0 +1,55 @@
+<script>
+    class AdjNode {
+        constructor(data) {
+            this.vertex = data;
+            this.next = null;
+        }
+    }
+
+    class Graph {
+        constructor(vertices) {
+            this.v = vertices;
+            this.graph = [false,false,false,false,false];
+        }
+
+        addEdge(src, dest) {
+            // Adding Node to the source
+            let node = new AdjNode(dest);
+            node.next = this.graph[src];
+            // console.log('graph',this.graph[src])
+            this.graph[src] = node;
+            // console.log('Node to Source',node)
+            // Adding the source node to the destination as 
+            // it is the undirected graph
+            node = new AdjNode(src);
+            node.next = this.graph[dest];
+            this.graph[dest] = node;
+            // console.log('Source To Destination',node)
+            
+            // console.log('===aftyer',this.graph)
+            
+        }
+        printGraph() {
+            for (let i = 0; i < this.v; i++) {
+                console.log('Adjacency list of vertex', i);
+                let temp = this.graph[i];
+                while (temp) {
+                    console.log("---> ", temp.vertex);
+                    temp = temp.next;
+                }
+            }
+        }
+    }
+    const V = 5
+    let graph = new Graph(V)
+    graph.addEdge(0, 1)
+    graph.addEdge(0, 4)
+    graph.addEdge(1, 2)
+    graph.addEdge(1, 3)
+    graph.addEdge(1, 4)
+    graph.addEdge(2, 3)
+    graph.addEdge(3, 4)
+
+    graph.printGraph()
+
+</script>
