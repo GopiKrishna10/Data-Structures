@@ -1,0 +1,24 @@
+<script>
+    function Alphabetize(word) {
+        if (!word) {
+            return null;
+        }
+        return word = word.split('').sort().join();
+    }
+    // console.log()
+
+    function Anagram() {
+        const words = ['map', 'art', 'how', 'rat', 'tar', 'who', 'pam', 'shoop'];
+        const anagrams = {};
+        words.forEach((word) => {
+            const sorted = Alphabetize(word);
+            if (anagrams[sorted]) {
+                return anagrams[sorted].push(word);
+            } else {
+                anagrams[sorted] = [word];
+            }
+        });
+        return anagrams;
+    }
+    console.log('======', Anagram())
+</script>
