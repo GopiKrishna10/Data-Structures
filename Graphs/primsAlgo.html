@@ -1,0 +1,56 @@
+<script>
+    let graph = [
+        [0, 2, 0, 6, 0],
+        [2, 0, 3, 8, 5],
+        [0, 3, 0, 0, 7],
+        [6, 8, 0, 0, 9],
+        [0, 5, 7, 9, 0]
+    ]
+    primeMST(graph);
+
+    function primeMST(graph) {
+        var parent = [];
+        var weights = [];
+        var visited = [];
+        let graphLength = graph.length;
+        for (let i = 0; i < graphLength; i++) {
+            weights[i] = 100000000;
+            visited[i] = false;
+        }
+        weights[0] = 0
+        parent[0] = -1;
+        for (let i = 0; i < graphLength - 1; i++) {
+            let u = minWeight(graphLength, weights, visited);
+            visited[u] = true;
+            for (let v = 0; v < graphLength; v++) {
+                if (graph[u][v] && visited[v] === false && graph[u][v] < weights[v]) {
+                    parent[v] = u;
+                    weights[v] = graph[u][v];
+                }
+            }
+        }
+        printMST(parent, graphLength, graph, weights)
+
+    }
+
+    function minWeight(graphLength, weights, visited) {
+        let min = 10000000000000000;
+        let minIndex;
+        for (let j = 0; j < graphLength; j++) {
+            if (visited[j] === false && weights[j] < min) {
+                min = weights[j];
+                minIndex = j
+            }
+        }
+        return minIndex;
+    }
+
+    function printMST(parent, V, graph, weights) {
+        let sum = 0
+        for (let i = 0; i < V; i++) {
+            sum += weights[i];
+        }
+        document.write(sum)
+            // document.write('weights', weights)
+    }
+</script>
