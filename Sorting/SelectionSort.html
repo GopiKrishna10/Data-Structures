@@ -1,0 +1,27 @@
+
+<!--
+1.Set the first element as minimum.
+2.Compare minimum with the second element. 
+If the second element is smaller than minimum, assign second element as minimum.
+-->
+
+<script>
+    let arr = [9, 5, 1, 4, 3];
+
+    function SelectionSort() {
+        for (let i = 0; i < arr.length-1; i++) {
+            let min_index = i;
+            for(let j = i+1; j< arr.length;j++){
+                if(arr[j] < arr[min_index]){
+                    min_index = j
+                }
+            }
+            let temp = arr[i];
+            arr[i] = arr[min_index];
+            arr[min_index] = temp;
+        }
+        return arr;
+    }
+    console.log('Selection Sort',SelectionSort());
+
+</script>

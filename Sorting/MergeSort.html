@@ -1,0 +1,35 @@
+<script>
+    let arr = [1, 5, 10, 12, 6, 9]
+    let p = 0;
+    let r = arr.length;
+    let q = Math.floor((p + r) / 2);
+    function merge(arr, p, q, r) {
+        let L = arr.slice(p, q + 1);
+        let M = arr.slice(q + 1, arr.length);
+        let i = 0, j = 0, k = p;
+
+        while (i < L.length && j < M.length) {
+            if (L[i] <= M[j]) {
+                arr[i] = L[i];
+                i++;
+            } else {
+                arr[k] = M[j];
+                j++;
+            }
+            k++;
+        }
+        while (i < L.length) {
+            arr[k] = L[i];
+            i++;
+            k++;
+        }
+        while (j < M.length) {
+            arr[k] = M[j];
+            j++;
+            k++
+        }
+        console.log(arr);
+    }
+    merge(arr, p, q, r);
+
+</script>

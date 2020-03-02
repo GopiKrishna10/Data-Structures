@@ -1,0 +1,61 @@
+<script>
+    class DisjointUnionSet {
+        constructor(n) {
+            this.rank = [];
+            this.parent = []
+            this.n = n;
+            this.makeSet();
+        }
+        makeSet() {
+            for (let i = 0; i < this.n; i++) {
+                this.parent[i] = i;
+                this.rank[i] = 0;
+            }
+        }
+        find(x) {
+            if (this.parent[x] != x) {
+                this.parent[x] = this.find(this.parent[x]);
+            }
+            return this.parent[x];
+        }
+        union(x, y) {
+            let xRoot = this.find(x);
+            let yRoot = this.find(y);
+            if (xRoot === yRoot) {
+                return;
+            }
+            if (this.rank[xRoot] < this.rank[yRoot]) {
+                this.parent[xRoot] = yRoot;
+            } else if (this.rank[xRoot] > this.rank[yRoot]) {
+                this.parent[yRoot] = xRoot;
+
+            } else {
+                this.parent[yRoot] = xRoot;
+                this.rank[xRoot] = this.rank[xRoot] + 1;
+            }
+        console.log('after Uniion',this.parent);
+        }
+    }
+    const djSet = new DisjointUnionSet(5);
+    djSet.union(0, 2);
+    djSet.union(4, 2);
+    djSet.union(3, 1);
+    // console.log('=====',djSet.find(4) , djSet.find(0))
+    
+    if (djSet.find(4) == djSet.find(0)) {
+        document.write('  4 is a friend of 0  ===> Yes ')
+        document.write("<br>");
+    } else {
+        document.write(' 4 is a friend of 0  ===> No');
+        document.write("<br>");
+    }
+    // console.log('=====',djSet.find(1) , djSet.find(0))
+    if (djSet.find(1) == djSet.find(0)) {
+        document.write(' 1 is a friend of 0 ===> Yes')
+        document.write("<br>");
+    } else {
+        document.write("<br>");
+        document.write(' 1 is a friend of 0 ===> No')
+    }
+
+</script>
